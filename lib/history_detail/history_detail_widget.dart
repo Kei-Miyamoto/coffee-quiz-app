@@ -68,15 +68,15 @@ class _HistoryDetailWidgetState extends State<HistoryDetailWidget> {
                             const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                         child: Text(
                           'HistoryDetail',
-                          style: FlutterFlowTheme.of(context)
-                              .titleLarge
-                              .override(
-                                fontFamily: 'Outfit',
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                fontSize: 22.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.w500,
-                              ),
+                          style:
+                              FlutterFlowTheme.of(context).titleLarge.override(
+                                    fontFamily: 'Outfit',
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    fontSize: 22.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                         ),
                       ),
                     ],
@@ -151,7 +151,7 @@ class _HistoryDetailWidgetState extends State<HistoryDetailWidget> {
                               return Center(
                                 child: Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 300.0, 0.0, 0.0),
+                                      0.0, 300.0, 0.0, 300.0),
                                   child: SizedBox(
                                     width: 50.0,
                                     height: 50.0,
@@ -206,7 +206,7 @@ class _HistoryDetailWidgetState extends State<HistoryDetailWidget> {
                                                 decoration: BoxDecoration(
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .primaryText,
+                                                      .secondaryBackground,
                                                   boxShadow: const [
                                                     BoxShadow(
                                                       blurRadius: 4.0,
@@ -260,9 +260,8 @@ class _HistoryDetailWidgetState extends State<HistoryDetailWidget> {
                                                                 .override(
                                                                   fontFamily:
                                                                       'Inter',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .alternate,
+                                                                  color: const Color(
+                                                                      0xFF57636C),
                                                                   letterSpacing:
                                                                       0.0,
                                                                 ),
@@ -336,9 +335,8 @@ class _HistoryDetailWidgetState extends State<HistoryDetailWidget> {
                                                                   .override(
                                                                     fontFamily:
                                                                         'Inter',
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .alternate,
+                                                                    color: const Color(
+                                                                        0xFF57636C),
                                                                     letterSpacing:
                                                                         0.0,
                                                                   ),
@@ -355,9 +353,8 @@ class _HistoryDetailWidgetState extends State<HistoryDetailWidget> {
                                                                   .override(
                                                                     fontFamily:
                                                                         'Inter',
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .alternate,
+                                                                    color: const Color(
+                                                                        0xFF57636C),
                                                                     letterSpacing:
                                                                         0.0,
                                                                   ),
@@ -464,7 +461,7 @@ class _HistoryDetailWidgetState extends State<HistoryDetailWidget> {
                         ),
                         Container(
                           width: 403.7,
-                          height: 30.0,
+                          height: 86.7,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context).info,
                           ),

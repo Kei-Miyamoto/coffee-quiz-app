@@ -116,18 +116,18 @@ class _DashboardWidgetState extends State<DashboardWidget>
       'containerOnPageLoadAnimation2': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
-          VisibilityEffect(duration: 1600.ms),
+          VisibilityEffect(duration: 160.ms),
           FadeEffect(
             curve: Curves.easeInOut,
-            delay: 1600.0.ms,
-            duration: 440.0.ms,
+            delay: 160.0.ms,
+            duration: 350.0.ms,
             begin: 0.0,
             end: 1.0,
           ),
           MoveEffect(
             curve: Curves.easeInOut,
-            delay: 1600.0.ms,
-            duration: 440.0.ms,
+            delay: 160.0.ms,
+            duration: 350.0.ms,
             begin: const Offset(0.0, 70.0),
             end: const Offset(0.0, 0.0),
           ),
@@ -444,8 +444,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                     textAlign: TextAlign.start,
                     style: FlutterFlowTheme.of(context).titleLarge.override(
                           fontFamily: 'Outfit',
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                          color: const Color(0xFF14181B),
                           fontSize: 22.0,
                           letterSpacing: 0.0,
                           fontWeight: FontWeight.w500,
@@ -460,6 +459,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                     future: QuizSessionGroup.getQuizSessionAPICall.call(
                       userId: currentUserUid,
                       limit: 1,
+                      offset: 1,
                     ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
@@ -571,7 +571,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                 if (getJsonField(
                                                       containerGetQuizSessionAPIResponse
                                                           .jsonBody,
-                                                      r'''$[0]''',
+                                                      r'''$['quiz_session']''',
                                                     ) !=
                                                     null)
                                                   Padding(
@@ -584,9 +584,9 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                         getJsonField(
                                                           containerGetQuizSessionAPIResponse
                                                               .jsonBody,
-                                                          r'''$[0].display_name''',
+                                                          r'''$['quiz_session'][0].display_name''',
                                                         )?.toString(),
-                                                        'カテゴリ名',
+                                                        'テスト',
                                                       ),
                                                       textAlign:
                                                           TextAlign.start,
@@ -596,9 +596,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                           .override(
                                                             fontFamily:
                                                                 'Inter Tight',
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .alternate,
+                                                            color: const Color(
+                                                                0xFF57636C),
                                                             fontSize: 14.0,
                                                             letterSpacing: 0.0,
                                                             fontWeight:
@@ -609,7 +608,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                 if (getJsonField(
                                                       containerGetQuizSessionAPIResponse
                                                           .jsonBody,
-                                                      r'''$[0]''',
+                                                      r'''$['quiz_session'][0]''',
                                                     ) ==
                                                     null)
                                                   Padding(
@@ -624,9 +623,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                           .bodyMedium
                                                           .override(
                                                             fontFamily: 'Inter',
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .alternate,
+                                                            color: const Color(
+                                                                0xFF57636C),
                                                             letterSpacing: 0.0,
                                                             fontWeight:
                                                                 FontWeight.w600,
@@ -641,7 +639,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                       if ((getJsonField(
                                                 containerGetQuizSessionAPIResponse
                                                     .jsonBody,
-                                                r'''$[0]''',
+                                                r'''$.quiz_session''',
                                               ) !=
                                               null) &&
                                           responsiveVisibility(
@@ -652,7 +650,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                           percent: getJsonField(
                                             containerGetQuizSessionAPIResponse
                                                 .jsonBody,
-                                            r'''$[0].percent''',
+                                            r'''$['quiz_session'][0].percent''',
                                           ),
                                           radius: 45.0,
                                           lineWidth: 8.0,
@@ -667,7 +665,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                               getJsonField(
                                                 containerGetQuizSessionAPIResponse
                                                     .jsonBody,
-                                                r'''$[0].percent_text''',
+                                                r'''$['quiz_session'][0].percent_text''',
                                               )?.toString(),
                                               '％',
                                             ),
@@ -697,7 +695,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                 ),
                 Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 10.0),
+                      const EdgeInsetsDirectional.fromSTEB(16.0, 10.0, 16.0, 10.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
@@ -739,13 +737,12 @@ class _DashboardWidgetState extends State<DashboardWidget>
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                  const Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 16.0, 0.0),
                                     child: Icon(
-                                      Icons.checklist_sharp,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondary,
+                                      Icons.checklist_rounded,
+                                      color: Color(0xFF39D2C0),
                                       size: 32.0,
                                     ),
                                   ),
@@ -769,71 +766,29 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                 fontWeight: FontWeight.w500,
                                               ),
                                         ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 5.0, 0.0, 5.0),
-                                          child: RichText(
-                                            textScaler: MediaQuery.of(context)
-                                                .textScaler,
-                                            text: TextSpan(
-                                              children: [
-                                                TextSpan(
-                                                  text: 'これまで間違えた問題',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .alternate,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
-                                                ),
-                                                TextSpan(
-                                                  text: '　',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .primaryBackground,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                                ),
-                                                TextSpan(
-                                                  text: '',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .primaryBackground,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                                )
-                                              ],
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Inter',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .alternate,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 4.0, 4.0, 0.0),
+                                              child: AutoSizeText(
+                                                'これまで間違えた問題',
+                                                textAlign: TextAlign.start,
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .displaySmall
+                                                    .override(
+                                                      fontFamily: 'Inter Tight',
+                                                      color: const Color(0xFF57636C),
+                                                      fontSize: 14.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                              ),
                                             ),
-                                          ),
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -896,7 +851,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                       child: Container(
                         width: double.infinity,
                         constraints: const BoxConstraints(
-                          minHeight: 120.0,
+                          minHeight: 100.0,
                         ),
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -917,12 +872,12 @@ class _DashboardWidgetState extends State<DashboardWidget>
                           ),
                         ),
                         child: SizedBox(
-                          height: 1.0,
+                          height: 0.6,
                           child: Stack(
                             children: [
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 30.0, 0.0, 12.0),
+                                    0.0, 12.0, 0.0, 0.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -968,79 +923,40 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                             FontWeight.w500,
                                                       ),
                                                 ),
-                                                Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 5.0, 0.0, 5.0),
-                                                  child: RichText(
-                                                    textScaler:
-                                                        MediaQuery.of(context)
-                                                            .textScaler,
-                                                    text: TextSpan(
-                                                      children: [
-                                                        TextSpan(
-                                                          text: 'カテゴリ別トレーニング',
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Inter',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .alternate,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                              ),
-                                                        ),
-                                                        TextSpan(
-                                                          text: '　',
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Inter',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryBackground,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                              ),
-                                                        ),
-                                                        TextSpan(
-                                                          text: '',
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Inter',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryBackground,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                              ),
-                                                        )
-                                                      ],
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                            fontFamily: 'Inter',
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .alternate,
-                                                            letterSpacing: 0.0,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                          ),
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  4.0,
+                                                                  4.0,
+                                                                  0.0),
+                                                      child: AutoSizeText(
+                                                        'カテゴリ別トレーニング',
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .displaySmall
+                                                            .override(
+                                                              fontFamily:
+                                                                  'Inter Tight',
+                                                              color: const Color(
+                                                                  0xFF57636C),
+                                                              fontSize: 14.0,
+                                                              letterSpacing:
+                                                                  0.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                            ),
+                                                      ),
                                                     ),
-                                                  ),
+                                                  ],
                                                 ),
                                               ],
                                             ),
@@ -1079,7 +995,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                     textAlign: TextAlign.start,
                     style: FlutterFlowTheme.of(context).titleLarge.override(
                           fontFamily: 'Outfit',
-                          color: FlutterFlowTheme.of(context).alternate,
+                          color: const Color(0xFF14181B),
                           fontSize: 22.0,
                           letterSpacing: 0.0,
                           fontWeight: FontWeight.w500,
@@ -1125,7 +1041,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                           maxWidth: 800.0,
                         ),
                         decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).primaryText,
+                          color: FlutterFlowTheme.of(context).secondaryText,
                           boxShadow: const [
                             BoxShadow(
                               blurRadius: 4.0,
@@ -1296,7 +1212,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                   scrollDirection: Axis.vertical,
                   children: [
                     SizedBox(
-                      height: 400.0,
+                      height: 360.92,
                       child: Builder(
                         builder: (context) {
                           final categories = FFAppState().categoryList.toList();
@@ -1356,7 +1272,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                     },
                                     child: Container(
                                       width: 230.0,
-                                      height: 10.0,
+                                      height: 0.0,
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         boxShadow: const [
@@ -1494,52 +1410,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                               Padding(
                                                 padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        0.0, 5.0, 0.0, 5.0),
-                                                child: RichText(
-                                                  textScaler:
-                                                      MediaQuery.of(context)
-                                                          .textScaler,
-                                                  text: TextSpan(
-                                                    children: [
-                                                      TextSpan(
-                                                        text: valueOrDefault<
-                                                            String>(
-                                                          getJsonField(
-                                                            categoriesItem,
-                                                            r'''$['category_name']''',
-                                                          )?.toString(),
-                                                          'カテゴリ英名',
-                                                        ),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Inter',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .alternate,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
-                                                      )
-                                                    ],
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          fontSize: 16.0,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 5.0, 0.0, 0.0),
+                                                        0.0, 8.0, 0.0, 0.0),
                                                 child: Text(
                                                   valueOrDefault<String>(
                                                     getJsonField(
@@ -1554,13 +1425,11 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                       .override(
                                                         fontFamily: 'Inter',
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
+                                                            const Color(0xFF57636C),
                                                         fontSize: 12.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
-                                                            FontWeight.w100,
+                                                            FontWeight.normal,
                                                       ),
                                                 ),
                                               ),
@@ -1693,9 +1562,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                         .override(
                                                           fontFamily:
                                                               'Inter Tight',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .alternate,
+                                                          color:
+                                                              const Color(0xFF57636C),
                                                           fontSize: 14.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:

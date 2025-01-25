@@ -194,7 +194,7 @@ class _BeforeTestDialogWidgetState extends State<BeforeTestDialogWidget> {
                       FFButtonWidget(
                         onPressed: () async {
                           FFAppState().mode = 0;
-                          FFAppState().selectedCategoryId = null;
+                          FFAppState().selectedCategoryId = 0;
                           safeSetState(() {});
 
                           context.pushNamed(
@@ -222,10 +222,12 @@ class _BeforeTestDialogWidgetState extends State<BeforeTestDialogWidget> {
                               20.0, 0.0, 20.0, 0.0),
                           iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primary,
+                          color: FlutterFlowTheme.of(context).success,
                           textStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
                                     fontFamily: 'Inter Tight',
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
                                     letterSpacing: 0.0,
                                   ),
                           elevation: 0.0,

@@ -248,11 +248,13 @@ class _BeforeTrainingDialogWidgetState
                                   20.0, 0.0, 20.0, 0.0),
                               iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
-                              color: FlutterFlowTheme.of(context).primary,
+                              color: FlutterFlowTheme.of(context).success,
                               textStyle: FlutterFlowTheme.of(context)
                                   .titleSmall
                                   .override(
                                     fontFamily: 'Inter Tight',
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
                                     letterSpacing: 0.0,
                                   ),
                               elevation: 0.0,

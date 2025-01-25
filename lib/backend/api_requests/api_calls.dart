@@ -11,8 +11,7 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 /// Start QuizSession Group Code
 
 class QuizSessionGroup {
-  static String getBaseUrl() =>
-      'https://be89fa91-46b4-41c5-9b13-f84c754604ea-00-2ewakk0xboepr.pike.replit.dev';
+  static String getBaseUrl() => 'https://quiz-app-api-o7q8.onrender.com';
   static Map<String, String> headers = {};
   static PostQuizSessionAPICall postQuizSessionAPICall =
       PostQuizSessionAPICall();
@@ -103,6 +102,8 @@ class GetQuizSessionAPICall {
       headers: {},
       params: {
         'user_id': userId,
+        'offset': offset,
+        'limit': limit,
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -119,8 +120,7 @@ class GetQuizSessionAPICall {
 /// Start Category Group Code
 
 class CategoryGroup {
-  static String getBaseUrl() =>
-      'https://be89fa91-46b4-41c5-9b13-f84c754604ea-00-2ewakk0xboepr.pike.replit.dev';
+  static String getBaseUrl() => 'https://quiz-app-api-o7q8.onrender.com';
   static Map<String, String> headers = {};
   static GetCategoryAPICall getCategoryAPICall = GetCategoryAPICall();
 }
@@ -152,8 +152,7 @@ class GetCategoryAPICall {
 /// Start Question Group Code
 
 class QuestionGroup {
-  static String getBaseUrl() =>
-      'https://be89fa91-46b4-41c5-9b13-f84c754604ea-00-2ewakk0xboepr.pike.replit.dev';
+  static String getBaseUrl() => 'https://quiz-app-api-o7q8.onrender.com';
   static Map<String, String> headers = {};
   static GetQuestionAPICall getQuestionAPICall = GetQuestionAPICall();
   static RetrieveQuestionAPICall retrieveQuestionAPICall =
@@ -217,8 +216,7 @@ class RetrieveQuestionAPICall {
 /// Start QuizSessionDetail Group Code
 
 class QuizSessionDetailGroup {
-  static String getBaseUrl() =>
-      'https://be89fa91-46b4-41c5-9b13-f84c754604ea-00-2ewakk0xboepr.pike.replit.dev';
+  static String getBaseUrl() => 'https://quiz-app-api-o7q8.onrender.com';
   static Map<String, String> headers = {};
   static PostQuizSessionDetailAPICall postQuizSessionDetailAPICall =
       PostQuizSessionDetailAPICall();
@@ -289,8 +287,7 @@ class GetQuizSessionDetailAPICall {
 /// Start UserMistake Group Code
 
 class UserMistakeGroup {
-  static String getBaseUrl() =>
-      'https://be89fa91-46b4-41c5-9b13-f84c754604ea-00-2ewakk0xboepr.pike.replit.dev';
+  static String getBaseUrl() => 'https://quiz-app-api-o7q8.onrender.com';
   static Map<String, String> headers = {};
   static PostUserMistakeAPICall postUserMistakeAPICall =
       PostUserMistakeAPICall();
@@ -345,6 +342,8 @@ class GetUserMistakeAPICall {
       headers: {},
       params: {
         'user_id': userId,
+        'limit': limit,
+        'offset': offset,
       },
       returnBody: true,
       encodeBodyUtf8: false,

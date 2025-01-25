@@ -69,15 +69,15 @@ class _QuickTrainingWidgetState extends State<QuickTrainingWidget> {
                             const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                         child: Text(
                           'Quick Training',
-                          style: FlutterFlowTheme.of(context)
-                              .titleLarge
-                              .override(
-                                fontFamily: 'Outfit',
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                fontSize: 22.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.w500,
-                              ),
+                          style:
+                              FlutterFlowTheme.of(context).titleLarge.override(
+                                    fontFamily: 'Outfit',
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    fontSize: 22.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                         ),
                       ),
                     ],
@@ -146,7 +146,7 @@ class _QuickTrainingWidgetState extends State<QuickTrainingWidget> {
                                 QuestionGroup.getQuestionAPICall.call(
                               categoryId: widget.categoryId?.toString(),
                               testType: '1',
-                              limit: '4',
+                              limit: '20',
                               offset: nextPageMarker.nextPageNumber,
                             ),
                           ),
@@ -159,7 +159,7 @@ class _QuickTrainingWidgetState extends State<QuickTrainingWidget> {
                             firstPageProgressIndicatorBuilder: (_) => Center(
                               child: Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 300.0, 0.0, 0.0),
+                                    0.0, 300.0, 0.0, 300.0),
                                 child: SizedBox(
                                   width: 50.0,
                                   height: 50.0,
@@ -175,7 +175,7 @@ class _QuickTrainingWidgetState extends State<QuickTrainingWidget> {
                             newPageProgressIndicatorBuilder: (_) => Center(
                               child: Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 300.0, 0.0, 0.0),
+                                    0.0, 300.0, 0.0, 300.0),
                                 child: SizedBox(
                                   width: 50.0,
                                   height: 50.0,
@@ -210,7 +210,7 @@ class _QuickTrainingWidgetState extends State<QuickTrainingWidget> {
                                           ),
                                           decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
-                                                .primaryText,
+                                                .secondaryBackground,
                                             boxShadow: const [
                                               BoxShadow(
                                                 blurRadius: 4.0,
@@ -252,9 +252,7 @@ class _QuickTrainingWidgetState extends State<QuickTrainingWidget> {
                                                       .override(
                                                         fontFamily: 'Inter',
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .alternate,
+                                                            const Color(0xFF57636C),
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ),

@@ -19,9 +19,6 @@ class FFAppState extends ChangeNotifier {
   Future initializePersistedState() async {
     prefs = await SharedPreferences.getInstance();
     _safeInit(() {
-      _trueFlg = prefs.getString('ff_trueFlg') ?? _trueFlg;
-    });
-    _safeInit(() {
       _categoryList = prefs.getStringList('ff_categoryList')?.map((x) {
             try {
               return jsonDecode(x);
@@ -133,13 +130,6 @@ class FFAppState extends ChangeNotifier {
 
   void insertAtIndexInQuizSessionDetailList(int index, dynamic value) {
     quizSessionDetailList.insert(index, value);
-  }
-
-  String _trueFlg = 'true';
-  String get trueFlg => _trueFlg;
-  set trueFlg(String value) {
-    _trueFlg = value;
-    prefs.setString('ff_trueFlg', value);
   }
 
   String _currentAnswer = '';
