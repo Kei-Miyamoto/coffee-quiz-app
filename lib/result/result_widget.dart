@@ -136,8 +136,8 @@ class _ResultWidgetState extends State<ResultWidget> {
         body: SafeArea(
           top: true,
           child: Container(
-            width: 398.0,
-            height: 645.0,
+            width: 1040.4,
+            height: 799.5,
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).secondaryBackground,
               borderRadius: BorderRadius.circular(0.0),

@@ -660,15 +660,10 @@ class _TestWidgetState extends State<TestWidget> with TickerProviderStateMixin {
                                             // Result画面へ遷移
 
                                             context.pushNamed(
-                                              'Result',
+                                              'ResultCopy',
                                               queryParameters: {
                                                 'quizSessionId': serializeParam(
-                                                  getJsonField(
-                                                    (_model.quizSessionInfo
-                                                            ?.jsonBody ??
-                                                        ''),
-                                                    r'''$['id']''',
-                                                  ),
+                                                  0,
                                                   ParamType.int,
                                                 ),
                                               }.withoutNulls,
