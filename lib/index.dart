@@ -7,3 +7,4 @@ export '/recent_mistake/recent_mistake_widget.dart' show RecentMistakeWidget;
 export '/quick_training/quick_training_widget.dart' show QuickTrainingWidget;
 export '/history/history_widget.dart' show HistoryWidget;
 export '/history_detail/history_detail_widget.dart' show HistoryDetailWidget;
+export '/result_copy/result_copy_widget.dart' show ResultCopyWidget;

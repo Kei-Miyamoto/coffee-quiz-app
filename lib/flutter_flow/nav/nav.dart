@@ -151,6 +151,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.int,
             ),
           ),
+        ),
+        FFRoute(
+          name: 'ResultCopy',
+          path: '/resultCopy',
+          builder: (context, params) => ResultCopyWidget(
+            quizSessionId: params.getParam(
+              'quizSessionId',
+              ParamType.int,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
