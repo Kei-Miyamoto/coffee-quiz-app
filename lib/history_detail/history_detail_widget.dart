@@ -171,7 +171,7 @@ class _HistoryDetailWidgetState extends State<HistoryDetailWidget> {
                                 final quizSessionDetail = getJsonField(
                                   listViewGetQuizSessionDetailAPIResponse
                                       .jsonBody,
-                                  r'''$['quiz_session']''',
+                                  r'''$[*]''',
                                 ).toList();
 
                                 return ListView.builder(
