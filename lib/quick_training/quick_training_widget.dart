@@ -142,7 +142,6 @@ class _QuickTrainingWidgetState extends State<QuickTrainingWidget> {
               padding: EdgeInsets.zero,
               reverse: false,
               scrollDirection: Axis.vertical,
-              physics: const BouncingScrollPhysics(), // 追加
               builderDelegate: PagedChildBuilderDelegate<dynamic>(
                 // Customize what your widget looks like when it's loading the first page.
                 firstPageProgressIndicatorBuilder: (_) => Center(

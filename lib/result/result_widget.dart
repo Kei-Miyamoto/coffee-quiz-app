@@ -289,115 +289,169 @@ class _ResultWidgetState extends State<ResultWidget> {
                   color: FlutterFlowTheme.of(context).secondaryBackground,
                   borderRadius: BorderRadius.circular(0.0),
                 ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      FutureBuilder<ApiCallResponse>(
-                        future: QuizSessionDetailGroup
-                            .getQuizSessionDetailAPICall
-                            .call(
-                          quizSessionId: widget.quizSessionId,
-                        ),
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 300.0, 0.0, 300.0),
-                                child: SizedBox(
-                                  width: 50.0,
-                                  height: 50.0,
-                                  child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                      FlutterFlowTheme.of(context).primary,
-                                    ),
-                                  ),
-                                ),
+                child: FutureBuilder<ApiCallResponse>(
+                  future:
+                      QuizSessionDetailGroup.getQuizSessionDetailAPICall.call(
+                    quizSessionId: widget.quizSessionId,
+                  ),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 300.0, 0.0, 300.0),
+                          child: SizedBox(
+                            width: 50.0,
+                            height: 50.0,
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                FlutterFlowTheme.of(context).primary,
                               ),
-                            );
-                          }
-                          final listViewGetQuizSessionDetailAPIResponse =
-                              snapshot.data!;
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                    final listViewGetQuizSessionDetailAPIResponse =
+                        snapshot.data!;
 
-                          return Builder(
-                            builder: (context) {
-                              final resultQuizSessionsDetailInfo = getJsonField(
-                                listViewGetQuizSessionDetailAPIResponse
-                                    .jsonBody,
-                                r'''$[*]''',
-                              ).toList();
+                    return Builder(
+                      builder: (context) {
+                        final resultQuizSessionsDetailInfo = getJsonField(
+                          listViewGetQuizSessionDetailAPIResponse.jsonBody,
+                          r'''$[*]''',
+                        ).toList();
 
-                              return ListView.builder(
-                                padding: EdgeInsets.zero,
-                                shrinkWrap: true,
-                                scrollDirection: Axis.vertical,
-                                itemCount: resultQuizSessionsDetailInfo.length,
-                                itemBuilder: (context,
-                                    resultQuizSessionsDetailInfoIndex) {
-                                  final resultQuizSessionsDetailInfoItem =
-                                      resultQuizSessionsDetailInfo[
-                                          resultQuizSessionsDetailInfoIndex];
-                                  return Stack(
-                                    children: [
-                                      Align(
-                                        alignment:
-                                            const AlignmentDirectional(0.0, 0.0),
-                                        child: FlipCard(
-                                          fill: Fill.fillBack,
-                                          direction: FlipDirection.HORIZONTAL,
-                                          speed: 400,
-                                          front: Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    10.0, 10.0, 10.0, 10.0),
-                                            child: Container(
-                                              width: 420.2,
-                                              constraints: const BoxConstraints(
-                                                minHeight: 100.0,
+                        return ListView.builder(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemCount: resultQuizSessionsDetailInfo.length,
+                          itemBuilder:
+                              (context, resultQuizSessionsDetailInfoIndex) {
+                            final resultQuizSessionsDetailInfoItem =
+                                resultQuizSessionsDetailInfo[
+                                    resultQuizSessionsDetailInfoIndex];
+                            return Stack(
+                              children: [
+                                Align(
+                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                  child: FlipCard(
+                                    fill: Fill.fillBack,
+                                    direction: FlipDirection.HORIZONTAL,
+                                    speed: 400,
+                                    front: Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          10.0, 10.0, 10.0, 10.0),
+                                      child: Container(
+                                        width: 420.2,
+                                        constraints: const BoxConstraints(
+                                          minHeight: 100.0,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                          boxShadow: const [
+                                            BoxShadow(
+                                              blurRadius: 4.0,
+                                              color: Color(0x33000000),
+                                              offset: Offset(
+                                                0.0,
+                                                2.0,
                                               ),
-                                              decoration: BoxDecoration(
-                                                color:
+                                            )
+                                          ],
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                          border: Border.all(
+                                            color: FlutterFlowTheme.of(context)
+                                                .success,
+                                            width: 2.0,
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  10.0, 10.0, 10.0, 10.0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                getJsonField(
+                                                  resultQuizSessionsDetailInfoItem,
+                                                  r'''$['title']''',
+                                                ).toString(),
+                                                style:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                boxShadow: const [
-                                                  BoxShadow(
-                                                    blurRadius: 4.0,
-                                                    color: Color(0x33000000),
-                                                    offset: Offset(
-                                                      0.0,
-                                                      2.0,
-                                                    ),
-                                                  )
-                                                ],
-                                                borderRadius:
-                                                    BorderRadius.circular(12.0),
-                                                border: Border.all(
-                                                  color: FlutterFlowTheme.of(
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          color:
+                                                              const Color(0xFF57636C),
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                              if (getJsonField(
+                                                    resultQuizSessionsDetailInfoItem,
+                                                    r'''$['img_path']''',
+                                                  ) !=
+                                                  null)
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  child: Image.network(
+                                                    getJsonField(
+                                                      resultQuizSessionsDetailInfoItem,
+                                                      r'''$['img_path']''',
+                                                    ).toString(),
+                                                    width: 380.7,
+                                                    height: 89.1,
+                                                    fit: BoxFit.contain,
+                                                  ),
+                                                ),
+                                              RichText(
+                                                textScaler:
+                                                    MediaQuery.of(context)
+                                                        .textScaler,
+                                                text: TextSpan(
+                                                  children: [
+                                                    TextSpan(
+                                                      text: '',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily: 'Inter',
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .alternate,
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    )
+                                                  ],
+                                                  style: FlutterFlowTheme.of(
                                                           context)
-                                                      .success,
-                                                  width: 2.0,
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                                 ),
                                               ),
-                                              child: Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        10.0, 10.0, 10.0, 10.0),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                              RichText(
+                                                textScaler:
+                                                    MediaQuery.of(context)
+                                                        .textScaler,
+                                                text: TextSpan(
                                                   children: [
-                                                    Text(
-                                                      getJsonField(
-                                                        resultQuizSessionsDetailInfoItem,
-                                                        r'''$['title']''',
-                                                      ).toString(),
+                                                    TextSpan(
+                                                      text: 'あなたの回答：',
                                                       style: FlutterFlowTheme
                                                               .of(context)
                                                           .bodyMedium
@@ -408,202 +462,113 @@ class _ResultWidgetState extends State<ResultWidget> {
                                                             letterSpacing: 0.0,
                                                           ),
                                                     ),
-                                                    if (getJsonField(
-                                                          resultQuizSessionsDetailInfoItem,
-                                                          r'''$['img_path']''',
-                                                        ) !=
-                                                        null)
-                                                      ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8.0),
-                                                        child: Image.network(
-                                                          getJsonField(
-                                                            resultQuizSessionsDetailInfoItem,
-                                                            r'''$['img_path']''',
-                                                          ).toString(),
-                                                          width: 380.7,
-                                                          height: 89.1,
-                                                          fit: BoxFit.contain,
-                                                        ),
-                                                      ),
-                                                    RichText(
-                                                      textScaler:
-                                                          MediaQuery.of(context)
-                                                              .textScaler,
-                                                      text: TextSpan(
-                                                        children: [
-                                                          TextSpan(
-                                                            text: '',
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Inter',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .alternate,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
-                                                          )
-                                                        ],
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Inter',
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
-                                                      ),
-                                                    ),
-                                                    RichText(
-                                                      textScaler:
-                                                          MediaQuery.of(context)
-                                                              .textScaler,
-                                                      text: TextSpan(
-                                                        children: [
-                                                          TextSpan(
-                                                            text: 'あなたの回答：',
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Inter',
-                                                                  color: const Color(
-                                                                      0xFF57636C),
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
+                                                    TextSpan(
+                                                      text: getJsonField(
+                                                        resultQuizSessionsDetailInfoItem,
+                                                        r'''$['answer']''',
+                                                      ).toString(),
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily: 'Inter',
+                                                            color: const Color(
+                                                                0xFF57636C),
+                                                            letterSpacing: 0.0,
                                                           ),
-                                                          TextSpan(
-                                                            text: getJsonField(
-                                                              resultQuizSessionsDetailInfoItem,
-                                                              r'''$['answer']''',
-                                                            ).toString(),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Inter',
-                                                                  color: const Color(
-                                                                      0xFF57636C),
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
-                                                          )
-                                                        ],
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Inter',
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
+                                                    )
+                                                  ],
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        letterSpacing: 0.0,
                                                       ),
-                                                    ),
-                                                  ],
                                                 ),
                                               ),
-                                            ),
-                                          ),
-                                          back: Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    10.0, 10.0, 10.0, 10.0),
-                                            child: Container(
-                                              width: 420.2,
-                                              height: 159.5,
-                                              decoration: BoxDecoration(
-                                                color: getJsonField(
-                                                  resultQuizSessionsDetailInfoItem,
-                                                  r'''$['is_correct']''',
-                                                )
-                                                    ? FlutterFlowTheme.of(
-                                                            context)
-                                                        .success
-                                                    : FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
-                                                boxShadow: const [
-                                                  BoxShadow(
-                                                    blurRadius: 4.0,
-                                                    color: Color(0x33000000),
-                                                    offset: Offset(
-                                                      0.0,
-                                                      2.0,
-                                                    ),
-                                                  )
-                                                ],
-                                                borderRadius:
-                                                    BorderRadius.circular(12.0),
-                                              ),
-                                              child: Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        10.0, 10.0, 10.0, 10.0),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    ListView(
-                                                      padding: EdgeInsets.zero,
-                                                      shrinkWrap: true,
-                                                      scrollDirection:
-                                                          Axis.vertical,
-                                                      children: [
-                                                        Text(
-                                                          getJsonField(
-                                                            resultQuizSessionsDetailInfoItem,
-                                                            r'''$['choice']''',
-                                                          ).toString(),
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Inter',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .info,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                              ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
+                                            ],
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                          );
-                        },
-                      ),
-                    ],
-                  ),
+                                    ),
+                                    back: Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          10.0, 10.0, 10.0, 10.0),
+                                      child: Container(
+                                        width: 420.2,
+                                        height: 159.5,
+                                        decoration: BoxDecoration(
+                                          color: getJsonField(
+                                            resultQuizSessionsDetailInfoItem,
+                                            r'''$['is_correct']''',
+                                          )
+                                              ? FlutterFlowTheme.of(context)
+                                                  .success
+                                              : FlutterFlowTheme.of(context)
+                                                  .error,
+                                          boxShadow: const [
+                                            BoxShadow(
+                                              blurRadius: 4.0,
+                                              color: Color(0x33000000),
+                                              offset: Offset(
+                                                0.0,
+                                                2.0,
+                                              ),
+                                            )
+                                          ],
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                        ),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  10.0, 10.0, 10.0, 10.0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              ListView(
+                                                padding: EdgeInsets.zero,
+                                                shrinkWrap: true,
+                                                scrollDirection: Axis.vertical,
+                                                children: [
+                                                  Text(
+                                                    getJsonField(
+                                                      resultQuizSessionsDetailInfoItem,
+                                                      r'''$['choice']''',
+                                                    ).toString(),
+                                                    textAlign: TextAlign.center,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .info,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                    );
+                  },
                 ),
               ),
             ],

@@ -819,7 +819,7 @@ class _TestWidgetState extends State<TestWidget> with TickerProviderStateMixin {
             Align(
               alignment: const AlignmentDirectional(0.0, 0.0),
               child: Lottie.asset(
-                'assets/jsons/Main_Scene_(2).json',
+                'assets/jsons/Main_Scene_(3).json',
                 width: 375.3,
                 height: 323.6,
                 fit: BoxFit.contain,

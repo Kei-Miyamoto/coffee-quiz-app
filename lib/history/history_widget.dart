@@ -161,504 +161,458 @@ class _HistoryWidgetState extends State<HistoryWidget>
             : null,
         body: SafeArea(
           top: true,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  height: MediaQuery.sizeOf(context).height * 1.0,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).info,
-                    borderRadius: BorderRadius.circular(0.0),
+          child: Container(
+            height: MediaQuery.sizeOf(context).height * 1.0,
+            decoration: BoxDecoration(
+              color: FlutterFlowTheme.of(context).info,
+              borderRadius: BorderRadius.circular(0.0),
+            ),
+            child: PagedListView<ApiPagingParams, dynamic>(
+              pagingController: _model.setListViewController(
+                (nextPageMarker) => QuizSessionGroup.getQuizSessionAPICall.call(
+                  userId: currentUserUid,
+                  limit: 10,
+                  offset: nextPageMarker.nextPageNumber,
+                ),
+              ),
+              padding: EdgeInsets.zero,
+              shrinkWrap: true,
+              reverse: false,
+              scrollDirection: Axis.vertical,
+              builderDelegate: PagedChildBuilderDelegate<dynamic>(
+                // Customize what your widget looks like when it's loading the first page.
+                firstPageProgressIndicatorBuilder: (_) => Center(
+                  child: Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 300.0, 0.0, 300.0),
+                    child: SizedBox(
+                      width: 50.0,
+                      height: 50.0,
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          FlutterFlowTheme.of(context).primary,
+                        ),
+                      ),
+                    ),
                   ),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        PagedListView<ApiPagingParams, dynamic>(
-                          pagingController: _model.setListViewController(
-                            (nextPageMarker) =>
-                                QuizSessionGroup.getQuizSessionAPICall.call(
-                              userId: currentUserUid,
-                              limit: 10,
-                              offset: nextPageMarker.nextPageNumber,
-                            ),
-                          ),
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          reverse: false,
-                          scrollDirection: Axis.vertical,
-                          builderDelegate: PagedChildBuilderDelegate<dynamic>(
-                            // Customize what your widget looks like when it's loading the first page.
-                            firstPageProgressIndicatorBuilder: (_) => Center(
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 300.0, 0.0, 300.0),
-                                child: SizedBox(
-                                  width: 50.0,
-                                  height: 50.0,
-                                  child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                      FlutterFlowTheme.of(context).primary,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            // Customize what your widget looks like when it's loading another page.
-                            newPageProgressIndicatorBuilder: (_) => Center(
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 300.0, 0.0, 300.0),
-                                child: SizedBox(
-                                  width: 50.0,
-                                  height: 50.0,
-                                  child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                      FlutterFlowTheme.of(context).primary,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
+                ),
+                // Customize what your widget looks like when it's loading another page.
+                newPageProgressIndicatorBuilder: (_) => Center(
+                  child: Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 300.0, 0.0, 300.0),
+                    child: SizedBox(
+                      width: 50.0,
+                      height: 50.0,
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          FlutterFlowTheme.of(context).primary,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
 
-                            itemBuilder: (context, _, quizSessionsListIndex) {
-                              final quizSessionsListItem = _model
-                                  .listViewPagingController!
-                                  .itemList![quizSessionsListIndex];
-                              return Visibility(
-                                visible: getJsonField(
-                                      quizSessionsListItem,
-                                      r'''$[*]''',
-                                    ) !=
-                                    null,
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 10.0, 10.0, 12.0),
-                                  child: Container(
-                                    key: ValueKey(getJsonField(
-                                      quizSessionsListItem,
-                                      r'''$['is_answer']''',
-                                    ).toString()),
-                                    height: 132.8,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context).info,
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          blurRadius: 3.0,
-                                          color: Color(0x33000000),
-                                          offset: Offset(
-                                            0.0,
-                                            1.0,
+                itemBuilder: (context, _, quizSessionsListIndex) {
+                  final quizSessionsListItem = _model.listViewPagingController!
+                      .itemList![quizSessionsListIndex];
+                  return Visibility(
+                    visible: getJsonField(
+                          quizSessionsListItem,
+                          r'''$[*]''',
+                        ) !=
+                        null,
+                    child: Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          10.0, 10.0, 10.0, 12.0),
+                      child: Container(
+                        key: ValueKey(getJsonField(
+                          quizSessionsListItem,
+                          r'''$['is_answer']''',
+                        ).toString()),
+                        height: 132.8,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).info,
+                          boxShadow: const [
+                            BoxShadow(
+                              blurRadius: 3.0,
+                              color: Color(0x33000000),
+                              offset: Offset(
+                                0.0,
+                                1.0,
+                              ),
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(12.0),
+                          border: Border.all(
+                            color: const Color(0xFFE5E7EB),
+                            width: 1.0,
+                          ),
+                        ),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.pushNamed(
+                              'HistoryDetail',
+                              queryParameters: {
+                                'quizSessionId': serializeParam(
+                                  getJsonField(
+                                    quizSessionsListItem,
+                                    r'''$['id']''',
+                                  ),
+                                  ParamType.int,
+                                ),
+                              }.withoutNulls,
+                            );
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            10.0, 0.0, 0.0, 0.0),
+                                        child: Container(
+                                          width: 244.7,
+                                          height: 100.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .info,
                                           ),
-                                        )
-                                      ],
-                                      borderRadius: BorderRadius.circular(12.0),
-                                      border: Border.all(
-                                        color: const Color(0xFFE5E7EB),
-                                        width: 1.0,
-                                      ),
-                                    ),
-                                    child: InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        context.pushNamed(
-                                          'HistoryDetail',
-                                          queryParameters: {
-                                            'quizSessionId': serializeParam(
-                                              getJsonField(
-                                                quizSessionsListItem,
-                                                r'''$['id']''',
-                                              ),
-                                              ParamType.int,
-                                            ),
-                                          }.withoutNulls,
-                                        );
-                                      },
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Column(
+                                          child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
                                             children: [
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsetsDirectional
-                                                            .fromSTEB(10.0, 0.0,
-                                                                0.0, 0.0),
-                                                    child: Container(
-                                                      width: 244.7,
-                                                      height: 100.0,
-                                                      decoration: BoxDecoration(
-                                                        color:
-                                                            FlutterFlowTheme.of(
+                                              Align(
+                                                alignment: const AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                child: Padding(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(10.0, 10.0,
+                                                          10.0, 10.0),
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      RichText(
+                                                        textScaler:
+                                                            MediaQuery.of(
                                                                     context)
-                                                                .info,
-                                                      ),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Align(
-                                                            alignment:
-                                                                const AlignmentDirectional(
-                                                                    0.0, 0.0),
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          10.0,
-                                                                          10.0,
-                                                                          10.0,
-                                                                          10.0),
-                                                              child: Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  RichText(
-                                                                    textScaler:
-                                                                        MediaQuery.of(context)
-                                                                            .textScaler,
-                                                                    text:
-                                                                        TextSpan(
-                                                                      children: [
-                                                                        TextSpan(
-                                                                          text:
-                                                                              '実施日：',
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: 'Inter',
-                                                                                color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                letterSpacing: 0.0,
-                                                                              ),
-                                                                        ),
-                                                                        TextSpan(
-                                                                          text:
-                                                                              valueOrDefault<String>(
-                                                                            getJsonField(
-                                                                              quizSessionsListItem,
-                                                                              r'''$['completed_at']''',
-                                                                            )?.toString(),
-                                                                            '実施日',
-                                                                          ),
-                                                                          style:
-                                                                              TextStyle(
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).secondaryText,
-                                                                          ),
-                                                                        )
-                                                                      ],
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Inter',
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).primaryText,
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                          ),
-                                                                    ),
+                                                                .textScaler,
+                                                        text: TextSpan(
+                                                          children: [
+                                                            TextSpan(
+                                                              text: '実施日：',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Inter',
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondaryText,
+                                                                    letterSpacing:
+                                                                        0.0,
                                                                   ),
-                                                                  RichText(
-                                                                    textScaler:
-                                                                        MediaQuery.of(context)
-                                                                            .textScaler,
-                                                                    text:
-                                                                        TextSpan(
-                                                                      children: [
-                                                                        TextSpan(
-                                                                          text:
-                                                                              'モード：',
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: 'Inter',
-                                                                                color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                letterSpacing: 0.0,
-                                                                              ),
-                                                                        ),
-                                                                        TextSpan(
-                                                                          text:
-                                                                              valueOrDefault<String>(
-                                                                            getJsonField(
-                                                                                      quizSessionsListItem,
-                                                                                      r'''$['mode']''',
-                                                                                    ) ==
-                                                                                    0
-                                                                                ? 'TEST'
-                                                                                : 'PRACTICE',
-                                                                            'モード形態',
-                                                                          ),
-                                                                          style:
-                                                                              TextStyle(
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).secondaryText,
-                                                                          ),
-                                                                        )
-                                                                      ],
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Inter',
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).alternate,
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                          ),
-                                                                    ),
-                                                                  ),
-                                                                  RichText(
-                                                                    textScaler:
-                                                                        MediaQuery.of(context)
-                                                                            .textScaler,
-                                                                    text:
-                                                                        TextSpan(
-                                                                      children: [
-                                                                        const TextSpan(
-                                                                          text:
-                                                                              '　　　　',
-                                                                          style:
-                                                                              TextStyle(
-                                                                            color:
-                                                                                Color(0xFF57636C),
-                                                                          ),
-                                                                        ),
-                                                                        TextSpan(
-                                                                          text:
-                                                                              valueOrDefault<String>(
-                                                                            getJsonField(
-                                                                                      quizSessionsListItem,
-                                                                                      r'''$['mode']''',
-                                                                                    ) ==
-                                                                                    0
-                                                                                ? '　'
-                                                                                : getJsonField(
-                                                                                    quizSessionsListItem,
-                                                                                    r'''$['display_name']''',
-                                                                                  ).toString(),
-                                                                            'モード形態',
-                                                                          ),
-                                                                          style:
-                                                                              const TextStyle(
-                                                                            color:
-                                                                                Color(0xFF57636C),
-                                                                          ),
-                                                                        )
-                                                                      ],
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Inter',
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).alternate,
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                          ),
-                                                                    ),
-                                                                  ),
-                                                                  RichText(
-                                                                    textScaler:
-                                                                        MediaQuery.of(context)
-                                                                            .textScaler,
-                                                                    text:
-                                                                        TextSpan(
-                                                                      children: [
-                                                                        const TextSpan(
-                                                                          text:
-                                                                              '結果：',
-                                                                          style:
-                                                                              TextStyle(
-                                                                            color:
-                                                                                Color(0xFF57636C),
-                                                                          ),
-                                                                        ),
-                                                                        TextSpan(
-                                                                          text:
-                                                                              valueOrDefault<String>(
-                                                                            getJsonField(
-                                                                              quizSessionsListItem,
-                                                                              r'''$['total_questions']''',
-                                                                            )?.toString(),
-                                                                            'XX',
-                                                                          ),
-                                                                          style:
-                                                                              const TextStyle(
-                                                                            color:
-                                                                                Color(0xFF57636C),
-                                                                            fontWeight:
-                                                                                FontWeight.w500,
-                                                                          ),
-                                                                        ),
-                                                                        const TextSpan(
-                                                                          text:
-                                                                              '  問中  ',
-                                                                          style:
-                                                                              TextStyle(
-                                                                            color:
-                                                                                Color(0xFF57636C),
-                                                                          ),
-                                                                        ),
-                                                                        TextSpan(
-                                                                          text:
-                                                                              valueOrDefault<String>(
-                                                                            getJsonField(
-                                                                              quizSessionsListItem,
-                                                                              r'''$['score']''',
-                                                                            )?.toString(),
-                                                                            'XX',
-                                                                          ),
-                                                                          style:
-                                                                              const TextStyle(
-                                                                            color:
-                                                                                Color(0xFF57636C),
-                                                                            fontWeight:
-                                                                                FontWeight.w500,
-                                                                          ),
-                                                                        ),
-                                                                        const TextSpan(
-                                                                          text:
-                                                                              '  問正解',
-                                                                          style:
-                                                                              TextStyle(
-                                                                            color:
-                                                                                Color(0xFF57636C),
-                                                                          ),
-                                                                        )
-                                                                      ],
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Inter',
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).alternate,
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                          ),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
                                                             ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  if (responsiveVisibility(
-                                                    context: context,
-                                                    tabletLandscape: false,
-                                                  ))
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  10.0,
-                                                                  0.0,
-                                                                  10.0,
-                                                                  0.0),
-                                                      child:
-                                                          CircularPercentIndicator(
-                                                        percent: getJsonField(
-                                                          quizSessionsListItem,
-                                                          r'''$['percent']''',
-                                                        ),
-                                                        radius: 45.0,
-                                                        lineWidth: 8.0,
-                                                        animation: true,
-                                                        animateFromLastPercent:
-                                                            true,
-                                                        progressColor:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .warning,
-                                                        backgroundColor:
-                                                            const Color(0x58F9CF58),
-                                                        center: Text(
-                                                          getJsonField(
-                                                            quizSessionsListItem,
-                                                            r'''$['percent_text']''',
-                                                          ).toString(),
+                                                            TextSpan(
+                                                              text:
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                getJsonField(
+                                                                  quizSessionsListItem,
+                                                                  r'''$['completed_at']''',
+                                                                )?.toString(),
+                                                                '実施日',
+                                                              ),
+                                                              style: TextStyle(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
+                                                              ),
+                                                            )
+                                                          ],
                                                           style: FlutterFlowTheme
                                                                   .of(context)
-                                                              .headlineMedium
+                                                              .bodyMedium
                                                               .override(
                                                                 fontFamily:
-                                                                    'Outfit',
-                                                                color: const Color(
-                                                                    0xFF57636C),
-                                                                fontSize: 24.0,
+                                                                    'Inter',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryText,
                                                                 letterSpacing:
                                                                     0.0,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                      RichText(
+                                                        textScaler:
+                                                            MediaQuery.of(
+                                                                    context)
+                                                                .textScaler,
+                                                        text: TextSpan(
+                                                          children: [
+                                                            TextSpan(
+                                                              text: 'モード：',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Inter',
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondaryText,
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                  ),
+                                                            ),
+                                                            TextSpan(
+                                                              text:
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                getJsonField(
+                                                                          quizSessionsListItem,
+                                                                          r'''$['mode']''',
+                                                                        ) ==
+                                                                        0
+                                                                    ? 'TEST'
+                                                                    : 'PRACTICE',
+                                                                'モード形態',
+                                                              ),
+                                                              style: TextStyle(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
+                                                              ),
+                                                            )
+                                                          ],
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Inter',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .alternate,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                      RichText(
+                                                        textScaler:
+                                                            MediaQuery.of(
+                                                                    context)
+                                                                .textScaler,
+                                                        text: TextSpan(
+                                                          children: [
+                                                            const TextSpan(
+                                                              text: '　　　　',
+                                                              style: TextStyle(
+                                                                color: Color(
+                                                                    0xFF57636C),
+                                                              ),
+                                                            ),
+                                                            TextSpan(
+                                                              text:
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                getJsonField(
+                                                                          quizSessionsListItem,
+                                                                          r'''$['mode']''',
+                                                                        ) ==
+                                                                        0
+                                                                    ? '　'
+                                                                    : getJsonField(
+                                                                        quizSessionsListItem,
+                                                                        r'''$['display_name']''',
+                                                                      ).toString(),
+                                                                'モード形態',
+                                                              ),
+                                                              style: const TextStyle(
+                                                                color: Color(
+                                                                    0xFF57636C),
+                                                              ),
+                                                            )
+                                                          ],
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Inter',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .alternate,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                      RichText(
+                                                        textScaler:
+                                                            MediaQuery.of(
+                                                                    context)
+                                                                .textScaler,
+                                                        text: TextSpan(
+                                                          children: [
+                                                            const TextSpan(
+                                                              text: '結果：',
+                                                              style: TextStyle(
+                                                                color: Color(
+                                                                    0xFF57636C),
+                                                              ),
+                                                            ),
+                                                            TextSpan(
+                                                              text:
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                getJsonField(
+                                                                  quizSessionsListItem,
+                                                                  r'''$['total_questions']''',
+                                                                )?.toString(),
+                                                                'XX',
+                                                              ),
+                                                              style: const TextStyle(
+                                                                color: Color(
+                                                                    0xFF57636C),
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w500,
                                                               ),
+                                                            ),
+                                                            const TextSpan(
+                                                              text: '  問中  ',
+                                                              style: TextStyle(
+                                                                color: Color(
+                                                                    0xFF57636C),
+                                                              ),
+                                                            ),
+                                                            TextSpan(
+                                                              text:
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                getJsonField(
+                                                                  quizSessionsListItem,
+                                                                  r'''$['score']''',
+                                                                )?.toString(),
+                                                                'XX',
+                                                              ),
+                                                              style: const TextStyle(
+                                                                color: Color(
+                                                                    0xFF57636C),
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
+                                                            ),
+                                                            const TextSpan(
+                                                              text: '  問正解',
+                                                              style: TextStyle(
+                                                                color: Color(
+                                                                    0xFF57636C),
+                                                              ),
+                                                            )
+                                                          ],
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Inter',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .alternate,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
                                                         ),
-                                                      ).animateOnPageLoad(
-                                                              animationsMap[
-                                                                  'progressBarOnPageLoadAnimation']!),
-                                                    ),
-                                                ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
                                               ),
                                             ],
                                           ),
-                                        ],
+                                        ),
                                       ),
-                                    ),
+                                      if (responsiveVisibility(
+                                        context: context,
+                                        tabletLandscape: false,
+                                      ))
+                                        Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  10.0, 0.0, 10.0, 0.0),
+                                          child: CircularPercentIndicator(
+                                            percent: getJsonField(
+                                              quizSessionsListItem,
+                                              r'''$['percent']''',
+                                            ),
+                                            radius: 45.0,
+                                            lineWidth: 8.0,
+                                            animation: true,
+                                            animateFromLastPercent: true,
+                                            progressColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .warning,
+                                            backgroundColor: const Color(0x58F9CF58),
+                                            center: Text(
+                                              getJsonField(
+                                                quizSessionsListItem,
+                                                r'''$['percent_text']''',
+                                              ).toString(),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .headlineMedium
+                                                  .override(
+                                                    fontFamily: 'Outfit',
+                                                    color: const Color(0xFF57636C),
+                                                    fontSize: 24.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                            ),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'progressBarOnPageLoadAnimation']!),
+                                        ),
+                                    ],
                                   ),
-                                ),
-                              );
-                            },
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                        Container(
-                          width: 403.7,
-                          height: 59.3,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context).info,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-              ],
+                  );
+                },
+              ),
             ),
           ),
         ),
