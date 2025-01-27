@@ -329,14 +329,86 @@ class _QuickTrainingWidgetState extends State<QuickTrainingWidget> {
                                                         quickChoiceItem,
                                                         r'''$['content']''',
                                                       ).toString(),
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                            fontFamily: 'Inter',
-                                                            color: FlutterFlowTheme
+                                                      width: 380.7,
+                                                      height: 89.08,
+                                                      fit: BoxFit.contain,
+                                                    ),
+                                                  ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      back: Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            10.0, 10.0, 10.0, 10.0),
+                                        child: Container(
+                                          width: 420.2,
+                                          height: 159.5,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .success,
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                blurRadius: 4.0,
+                                                color: Color(0x33000000),
+                                                offset: Offset(
+                                                  0.0,
+                                                  2.0,
+                                                ),
+                                              )
+                                            ],
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                          ),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    10.0, 10.0, 10.0, 10.0),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Builder(
+                                                  builder: (context) {
+                                                    final quickChoice =
+                                                        getJsonField(
+                                                      quickQuestionsItem,
+                                                      r'''$['choice']''',
+                                                    ).toList();
+
+                                                    return ListView.builder(
+                                                      padding: EdgeInsets.zero,
+                                                      shrinkWrap: false,
+                                                      scrollDirection:
+                                                          Axis.vertical,
+                                                      itemCount:
+                                                          quickChoice.length,
+                                                      itemBuilder: (context,
+                                                          quickChoiceIndex) {
+                                                        final quickChoiceItem =
+                                                            quickChoice[
+                                                                quickChoiceIndex];
+                                                        return Visibility(
+                                                          visible: (String
+                                                              choiceItem) {
+                                                            return choiceItem ==
+                                                                "true";
+                                                          }(getJsonField(
+                                                            quickChoiceItem,
+                                                            r'''$['is_answer']''',
+                                                          ).toString()),
+                                                          child: Text(
+                                                            getJsonField(
+                                                              quickChoiceItem,
+                                                              r'''$['content']''',
+                                                            ).toString(),
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .info,
                                                             letterSpacing: 0.0,
