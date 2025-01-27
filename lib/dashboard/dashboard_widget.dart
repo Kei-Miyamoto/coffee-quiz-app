@@ -1247,7 +1247,6 @@ class _DashboardWidgetState extends State<DashboardWidget>
                       return ListView.builder(
                         padding: EdgeInsets.zero,
                         primary: false,
-                        shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
                         itemCount: categories.length,
                         itemBuilder: (context, categoriesIndex) {
