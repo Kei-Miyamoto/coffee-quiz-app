@@ -425,6 +425,36 @@ class _DashboardWidgetState extends State<DashboardWidget>
                       borderRadius: BorderRadius.circular(0.0),
                     ),
                   ),
+                  FFButtonWidget(
+                    onPressed: () async {
+                      GoRouter.of(context).prepareAuthEvent();
+                      await authManager.signOut();
+                      GoRouter.of(context).clearRedirectLocation();
+
+                      context.pushNamedAuth('Login', context.mounted);
+                    },
+                    text: '',
+                    icon: const Icon(
+                      Icons.logout,
+                      size: 15.0,
+                    ),
+                    options: FFButtonOptions(
+                      height: 40.0,
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                      iconPadding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).success,
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleSmall.override(
+                                fontFamily: 'Inter Tight',
+                                color: Colors.white,
+                                letterSpacing: 0.0,
+                              ),
+                      elevation: 0.0,
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
                 ],
                 centerTitle: false,
                 elevation: 0.0,
@@ -435,6 +465,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
@@ -494,7 +525,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                               'quizSessionId': serializeParam(
                                 getJsonField(
                                   containerGetQuizSessionAPIResponse.jsonBody,
-                                  r'''$[0].id''',
+                                  r'''$['quiz_session'][0].id''',
                                 ),
                                 ParamType.int,
                               ),
@@ -968,8 +999,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                 ),
                               ),
                               Container(
-                                width: 356.6,
-                                height: 17.79,
+                                width: MediaQuery.sizeOf(context).width * 1.0,
+                                height: 17.8,
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context).success,
                                   borderRadius: const BorderRadius.only(
@@ -1171,7 +1202,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                             Stack(
                               children: [
                                 Container(
-                                  width: 362.1,
+                                  width: MediaQuery.sizeOf(context).width * 1.0,
                                   height: 22.0,
                                   decoration: BoxDecoration(
                                     color: FlutterFlowTheme.of(context).success,
@@ -1467,8 +1498,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                   child: Container(
-                    width: 399.0,
-                    height: 127.24,
+                    height: 127.2,
                     decoration: const BoxDecoration(),
                     child: Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(

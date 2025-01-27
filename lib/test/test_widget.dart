@@ -248,6 +248,7 @@ class _TestWidgetState extends State<TestWidget> with TickerProviderStateMixin {
             alignment: const AlignmentDirectional(0.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SingleChildScrollView(
                   child: Column(

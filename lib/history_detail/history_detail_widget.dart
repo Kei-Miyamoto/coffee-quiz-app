@@ -129,7 +129,6 @@ class _HistoryDetailWidgetState extends State<HistoryDetailWidget> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  width: 398.0,
                   height: MediaQuery.sizeOf(context).height * 1.0,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).info,
@@ -172,7 +171,7 @@ class _HistoryDetailWidgetState extends State<HistoryDetailWidget> {
                                 final quizSessionDetail = getJsonField(
                                   listViewGetQuizSessionDetailAPIResponse
                                       .jsonBody,
-                                  r'''$[*]''',
+                                  r'''$['quiz_session']''',
                                 ).toList();
 
                                 return ListView.builder(

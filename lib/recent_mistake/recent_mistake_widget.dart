@@ -122,7 +122,6 @@ class _RecentMistakeWidgetState extends State<RecentMistakeWidget> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  width: 398.0,
                   height: MediaQuery.sizeOf(context).height * 1.0,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,

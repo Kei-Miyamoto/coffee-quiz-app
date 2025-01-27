@@ -164,9 +164,10 @@ class _HistoryWidgetState extends State<HistoryWidget>
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  width: 398.0,
                   height: MediaQuery.sizeOf(context).height * 1.0,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).info,
@@ -241,8 +242,7 @@ class _HistoryWidgetState extends State<HistoryWidget>
                                       quizSessionsListItem,
                                       r'''$['is_answer']''',
                                     ).toString()),
-                                    width: double.infinity,
-                                    height: 132.84,
+                                    height: 132.8,
                                     decoration: BoxDecoration(
                                       color: FlutterFlowTheme.of(context).info,
                                       boxShadow: const [
@@ -281,9 +281,9 @@ class _HistoryWidgetState extends State<HistoryWidget>
                                         );
                                       },
                                       child: Row(
-                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisSize: MainAxisSize.min,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
+                                            MainAxisAlignment.center,
                                         children: [
                                           Column(
                                             mainAxisSize: MainAxisSize.max,
