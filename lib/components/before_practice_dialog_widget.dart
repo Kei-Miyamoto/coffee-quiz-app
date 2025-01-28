@@ -134,7 +134,14 @@ class _BeforePracticeDialogWidgetState
                           _model.numberOfQuestionsValue ??=
                               widget.questionLimit?.toString(),
                         ),
-                        options: ['2', '10', widget.questionLimit.toString()],
+                        options: [
+                          '5',
+                          '10',
+                          '15',
+                          '20',
+                          '25',
+                          widget.questionLimit.toString()
+                        ],
                         onChanged: (val) => safeSetState(
                             () => _model.numberOfQuestionsValue = val),
                         width: 200.0,

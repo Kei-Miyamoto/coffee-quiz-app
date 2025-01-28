@@ -356,7 +356,7 @@ class _TestWidgetState extends State<TestWidget> with TickerProviderStateMixin {
                                                                   'Outfit',
                                                               color: const Color(
                                                                   0xFF57636C),
-                                                              fontSize: 20.0,
+                                                              fontSize: 18.0,
                                                               letterSpacing:
                                                                   0.0,
                                                               fontWeight:
@@ -663,7 +663,12 @@ class _TestWidgetState extends State<TestWidget> with TickerProviderStateMixin {
                                               'ResultCopy',
                                               queryParameters: {
                                                 'quizSessionId': serializeParam(
-                                                  0,
+                                                  getJsonField(
+                                                    (_model.quizSessionInfo
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                    r'''$['id']''',
+                                                  ),
                                                   ParamType.int,
                                                 ),
                                               }.withoutNulls,
@@ -760,12 +765,12 @@ class _TestWidgetState extends State<TestWidget> with TickerProviderStateMixin {
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          Expanded(
+                                          Flexible(
                                             child: Padding(
                                               padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       10.0, 0.0, 10.0, 0.0),
-                                              child: Text(
+                                              child: AutoSizeText(
                                                 getJsonField(
                                                   choiceListItem,
                                                   r'''$['content']''',
@@ -778,8 +783,10 @@ class _TestWidgetState extends State<TestWidget> with TickerProviderStateMixin {
                                                           fontFamily: 'Inter',
                                                           color:
                                                               const Color(0xFF57636C),
-                                                          fontSize: 20.0,
+                                                          fontSize: 16.0,
                                                           letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w300,
                                                         ),
                                               ),
                                             ),
@@ -814,7 +821,7 @@ class _TestWidgetState extends State<TestWidget> with TickerProviderStateMixin {
             Align(
               alignment: const AlignmentDirectional(0.0, 0.0),
               child: Lottie.asset(
-                'assets/jsons/Main_Scene_(3).json',
+                'assets/jsons/Main_Scene_(4).json',
                 width: 375.3,
                 height: 323.6,
                 fit: BoxFit.contain,
